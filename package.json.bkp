@@ -1,0 +1,26 @@
+{
+  "name": "angular_unit_tests",
+  "version": "1.0.0",
+  "description": "Jasime Karma and ngMock",
+  "main": "index.js",
+  "dependencies": { },
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma": "^1.3.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "typescript": "^2.0.3"
+  },
+  "scripts": {
+    "test": "karma start jasmine.conf.js"
+  },
+  "keywords": [
+    "angular",
+    "tests"
+  ],
+  "author": "brandon",
+  "license": "MIT"
+}
