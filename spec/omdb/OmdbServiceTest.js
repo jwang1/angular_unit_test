@@ -17,6 +17,12 @@ describe('omdb service', function() {
       
       // debugging
       console.log(omdbApi.search('pie'));  
+      
+      // using ngMock dump to debug
+      console.log(angular.mock.dump(omdbApi.search('pie')));
+      
+      // also using Karma dump debug
+      dump(angular.mock.dump(omdbApi.search('pie')));
 
     //   expect(omdbApi.search('pie')).toBe(movieData);     // after getting data from the Real service, "toBe" not be held any more 
     
