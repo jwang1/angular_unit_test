@@ -8,15 +8,17 @@ describe('omdb service', function() {
       var omdbApi = {};
       
       // 3 ways of mocking
-      // a. by anonymous obj (as what's used here')
+      // a. by anonymous obj 
       // b. by module-name-string
-      // c. by anonymous function
-      angular.mock.module({
-          'omdbApi': {
-              search: function(query) {
-                  return movieData;
-              }
-          }
+      // c. by anonymous function (as what's used here')
+      angular.mock.module(function($provide) {
+          $provide.factory('omdbApi', function() {
+              return {
+                search: function(query) {
+                    return movieData;
+                }
+              };
+          });
       }); 
       
       angular.mock.inject(function(_omdbApi_) {
