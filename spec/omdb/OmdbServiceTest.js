@@ -18,6 +18,7 @@ describe('omdb service', function() {
          omdbApi = _omdbApi_; 
       });
       
+      // debugging
       console.log(omdbApi.search('pie'));  
       
 
@@ -25,4 +26,16 @@ describe('omdb service', function() {
     
       expect(omdbApi.search('pie')).toEqual(movieData);
    }); 
+   
+   it('# should return movie data by id', function() {
+       var omdbApi = {};
+       
+       module('omdb');
+       
+       inject(function(_omdbApi_) {
+           omdbApi = _omdbApi_;
+       });
+       
+       expect(omdbApi.find('tt016365')).toEqual(movieDataById);
+   })
 });
