@@ -45,6 +45,21 @@ describe('omdb service', function() {
    }); 
    
    it('# should return movie data by id', function() {
-       expect(omdbApi.find('tt016365')).toEqual(movieDataById);
+     var response;
+     
+     dump(omdbApi.getFindUrl());
+     
+     $httpBackend.when('GET', omdbApi.getFindUrl())
+      .respond(200, movieDataById);
+      
+      omdbApi.find('tt016365')
+        .then(function(data) {
+          response = movieDataById;
+        });
+        
+        $httpBackend.flush() ;   // without this, we will get "undefined" for response variable;  
+                                 // because $httpBackend.respond will NOT be called until flush() is called'
+      
+       expect(response).toEqual(movieDataById);
    })
 });
