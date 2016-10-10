@@ -12,14 +12,20 @@
   <script src="lib/jasmine-2.5.2/boot.js"></script>
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular/angular-mocks.js"></script>
+  
+  <!-- adding karma.js to support Karma's dump(...) function, on Jasmine SpecRunner.html -->
+  <!-- still not working after doing the following; ie, dump still undefined from SpecRunner.html -->
+  <script src="node_modules/karma/context/karma.js"></script>
 
   <!-- include source files here... -->
   <script src="src/Calculator.js"></script>
   <script src="src/omdb/OmdbService.js"></script>
+  <script src="src/movie-core/MovieCoreService.js"></script>
 
   <!-- include spec files here... -->
   <script src="spec/CalculatorTest.js"></script>
   <script src="spec/omdb/OmdbServiceTest.js"></script>
+  <script src="spec/movie-core/MovieCoreService.js"></scripte>
 
 </head>
 

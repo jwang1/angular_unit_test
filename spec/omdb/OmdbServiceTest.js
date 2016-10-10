@@ -9,7 +9,7 @@ describe('omdb service', function() {
   beforeEach(module('omdb'));     // missing this one can cause $httpBackend not injected correctly
 
    beforeEach(inject(function(_omdbApi_, _$httpBackend_) {
-      omdbApi = _omdbApi_;
+     omdbApi = _omdbApi_;
      $httpBackend = _$httpBackend_;
    }));
    
@@ -47,7 +47,7 @@ describe('omdb service', function() {
    it('# should return movie data by id', function() {
      var response;
      
-     dump('omdbApi.getFindUrl() = ' + omdbApi.getFindUrl());
+     angular.mock.dump('omdbApi.getFindUrl() = ' + omdbApi.getFindUrl());
      
      // check the url matched or not
      // another type of Guard.
@@ -60,7 +60,7 @@ describe('omdb service', function() {
     //  expectedUrl = /.*/;   // pass
     //  expectedUrl = /http:\/\/www.omdbapi.com\/?r=json&i=tt016365/;
      
-     dump(expectedUrl);
+     angular.mock.dump(expectedUrl);
      
      $httpBackend.when('GET', expectedUrl)
       .respond(200, movieDataById);
@@ -68,7 +68,9 @@ describe('omdb service', function() {
       omdbApi.find('tt016365')
         .then(function(data) {
           response = movieDataById;
-          dump('promise deferred data : ' + response);
+          // dump('promise deferred data : ' + response);
+          angular.mock.dump('promise deferred data : ' + response);  // when using Karma's dump(...),  Jasmine's SpecRunner not like it.  Failed'
+          // added the karma.js into SpecRunner.html; similar to angular.min.js and other 3rd party libs
         });
         
         $httpBackend.flush() ;   // without this, we will get "undefined" for response variable;  
