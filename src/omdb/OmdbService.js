@@ -46,6 +46,11 @@ angular.module('omdb', [])
                     // deferred = data;           // WRONG
                     // deferred = resolve(data);     // WRONG syntax       
                     deferred.resolve(data);
+                })
+                // .error(function(data) {
+                    // throw data;        // not working
+                .error(function() {
+                    deferred.reject();
                 });
 
             return deferred.promise;

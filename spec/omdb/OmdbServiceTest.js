@@ -75,5 +75,28 @@ describe('omdb service', function() {
                                  // because $httpBackend.respond will NOT be called until flush() is called'
       
        expect(response).toEqual(movieDataById);
-   })
+   });
+   
+   it('# should handle error', function() {
+     var expectedUrl = function(url) {
+       return url.indexOf('http://www.omdbapi.com') !== -1;
+     };
+     
+     var response;
+     
+     $httpBackend.when('GET', expectedUrl)
+        .respond(500);
+        
+     omdbApi.find('tt016365')
+      .then(function(data) {
+        response = movieDataById;
+      })
+      .catch(function() {
+        response = 'Error!';
+      });   
+      
+      $httpBackend.flush();
+      
+      expect(response).toEqual('Error!');
+   });
 });
