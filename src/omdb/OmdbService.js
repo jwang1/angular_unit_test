@@ -2,7 +2,8 @@ angular.module('omdb', [])
     .factory('omdbApi', function($http, $q) {
         var service = {};
         
-        var baseUrl = 'http://www.omdbapi.com/?y=&plot=full&r=json&';
+        // var baseUrl = 'http://www.omdbapi.com/?y=&plot=full&r=json&';
+        var baseUrl = 'http://www.omdbapi.com/?r=json&';
         var searchUrl;
         var findUrl;
         
@@ -24,7 +25,8 @@ angular.module('omdb', [])
             // $http.get()          // bug, not passing the url
             $http.get(searchUrl)
                 .success(function(data) {
-                   angular.mock.dump('data from rest :  ' + data);
+                //    angular.mock.dump('data from rest :  ' + data);   // works, BUT should not put ngMock dependencies here
+                console.log('data from rest : ' + data);
                    deferred.resolve(data);  
                 });
             return deferred.promise;
@@ -35,7 +37,9 @@ angular.module('omdb', [])
             
             deferred = $q.defer();
             
-            findUrl = baseUrl + encodeURIComponent(id);
+            // findUrl = baseUrl + 'i=' + encodeURIComponent(id);
+            findUrl = baseUrl + 'i=' + id;
+
             
             $http.get(findUrl)
                 .success(function(data) {

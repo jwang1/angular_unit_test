@@ -47,14 +47,28 @@ describe('omdb service', function() {
    it('# should return movie data by id', function() {
      var response;
      
-     dump(omdbApi.getFindUrl());
+     dump('omdbApi.getFindUrl() = ' + omdbApi.getFindUrl());
      
-     $httpBackend.when('GET', omdbApi.getFindUrl())
+     // check the url matched or not
+     // another type of Guard.
+     var expectedUrl = function(url) {
+      //  return url.indexOf('http://causing.failures.com') !== -1;
+       return url.indexOf('http://www.omdbapi.com') !== -1;
+     };
+     
+     // Note, the RegEx can be used as well
+    //  expectedUrl = /.*/;   // pass
+    //  expectedUrl = /http:\/\/www.omdbapi.com\/?r=json&i=tt016365/;
+     
+     dump(expectedUrl);
+     
+     $httpBackend.when('GET', expectedUrl)
       .respond(200, movieDataById);
       
       omdbApi.find('tt016365')
         .then(function(data) {
           response = movieDataById;
+          dump('promise deferred data : ' + response);
         });
         
         $httpBackend.flush() ;   // without this, we will get "undefined" for response variable;  
